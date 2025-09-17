@@ -12,9 +12,12 @@ def auto_login(url, username, password):
         try:
             page.goto(url)
             page.wait_for_load_state("networkidle")
+            page.wait_for_timeout(2000)
 
             page.fill("#username", username)
+            page.wait_for_timeout(200)
             page.fill("#password", password)
+            page.wait_for_timeout(200)
             page.click("#login-account")
 
             page.wait_for_timeout(5000)  # 等待登录完成
