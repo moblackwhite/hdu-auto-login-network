@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 def auto_login(url, username, password):
     with sync_playwright() as p:
         # 使用内置的 Chromium
-        browser = p.chromium.launch(headless=False)  # False 表示显示浏览器
+        browser = p.chromium.launch(headless=True)  # False 表示显示浏览器
         page = browser.new_page()
 
         try:

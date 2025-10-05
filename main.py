@@ -16,11 +16,10 @@ def check_network_and_login():
             logger.info("网络连接正常，无需登录。")
         else:
             logger.warning("检测到网络断开，正在尝试自动登录...")
-            load_dotenv()  # 加载环境变量
 
             url = "http://login.hdu.edu.cn/"
-            username = os.getenv("USERNAME")
-            password = os.getenv("PASSWORD")
+            username = os.getenv("STU_USERNAME")
+            password = os.getenv("STU_PASSWORD")
 
             if not username or not password:
                 logger.error("未找到用户名或密码，请检查 .env 文件。")
@@ -38,12 +37,13 @@ def check_network_and_login():
         logger.error(f"检查网络时发生未知错误: {e}")
 
 if __name__ == "__main__":
+    load_dotenv()  # 加载环境变量
     # 立即执行一次
     logger.info("=== 网络自动登录守护程序启动 ===")
     check_network_and_login()
 
-    # 每 2 分钟执行一次
-    schedule.every(2).minutes.do(check_network_and_login)
+    # 每 30s 执行一次
+    schedule.every(30).seconds.do(check_network_and_login)
 
     logger.info("已设置定时任务：每 2 分钟检查一次网络状态...")
 
