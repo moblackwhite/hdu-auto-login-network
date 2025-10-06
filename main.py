@@ -9,6 +9,7 @@ from network_utils import is_connected_to_internet
 # 初始化日志
 logger = setup_logger()
 
+
 def check_network_and_login():
     """检查网络并尝试登录"""
     try:
@@ -36,6 +37,7 @@ def check_network_and_login():
     except Exception as e:
         logger.error(f"检查网络时发生未知错误: {e}")
 
+
 if __name__ == "__main__":
     load_dotenv()  # 加载环境变量
     # 立即执行一次
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     # 每 30s 执行一次
     schedule.every(30).seconds.do(check_network_and_login)
 
-    logger.info("已设置定时任务：每 2 分钟检查一次网络状态...")
+    logger.info("已设置定时任务：每 30 秒检查一次网络状态...")
 
     # 保持程序运行
     while True:
